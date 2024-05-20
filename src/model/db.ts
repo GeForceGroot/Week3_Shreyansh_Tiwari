@@ -1,8 +1,11 @@
 import { Sequelize } from 'sequelize'
-const db = new Sequelize({
-  dialect: 'sqlite',
-  storage: __dirname + '/database.db'
+const db = new Sequelize('postgres', 'gefrocegroot', 'root', {
+  host: 'localhost',
+  dialect: 'postgres',
+  port : 5432
 });
+
+
 try {
   db.authenticate();
   console.log('Connection has been established successfully.');
