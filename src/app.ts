@@ -86,60 +86,60 @@ app.get('/weatherDashboard/:cityName?', async (req: Request, res: Response) => {
 // C. Mailing api that will have request body same like above api 
 // It will mail the data in form of table (same columns like dashboard)
 
-// app.post('/send-email', (req: Request, res: Response) => {
-//     const data = req.body.data;
-//     const transporter = nodemailer.createTransport({
-//         host: 'smtp.ethereal.email',
-//         port: 587,
-//         auth: {
-//             user: 'marlee.hagenes@ethereal.email',
-//             pass: '5ekzDqdy118Rrv5w2P'
-//         }
-//     });
+app.post('/send-email', (req: Request, res: Response) => {
+    const data = req.body.data;
+    const transporter = nodemailer.createTransport({
+        host: 'smtp.ethereal.email',
+        port: 587,
+        auth: {
+            user: 'marlee.hagenes@ethereal.email',
+            pass: '5ekzDqdy118Rrv5w2P'
+        }
+    });
 
-//     let table = '<table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse;">';
-//     table += `
-//             <tr>
-//                 <th>id</th>
-//                 <th>city</th>
-//                 <th>country</th>
-//                 <th>weather</th>
-//                 <th>time</th>
-//                 <th>Longitude</th>
-//                 <th>Latitude</th>
-//             </tr>
-//         `;
-//     data.forEach((element: any) => {
-//         var item: any = GetAllByCityData(element.city)
-//         table += `
-//                 <tr>
-//                     <td>${item.id}</td>
-//                     <td>${item.city}</td>
-//                     <td>${item.country}</td>
-//                     <td>${item.weather}</td>
-//                     <td>${item.time}</td>
-//                     <td>${item.Longitude}</td>
-//                     <td>${item.Latitude}</td>
-//                 </tr>
-//             `;
-//     });
-//     table += '</table>';
-//     var mailOptions = {
-//         from: 'marlee.hagenes@ethereal.email',
-//         to: 'tiwarishreyansh3@gmail.com',
-//         subject: 'Sending Email using Node.js',
-//         text: 'That was easy!',
-//         html: `<h1>Weather Data</h1>${table}`
-//     };
-//     transporter.sendMail(mailOptions, function (error, info) {
-//         if (error) {
-//             console.log(error);
-//         } else {
-//             console.log('Email sent: ' + info.response);
-//         }
-//     })
+    let table = '<table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse;">';
+    table += `
+            <tr>
+                <th>id</th>
+                <th>city</th>
+                <th>country</th>
+                <th>weather</th>
+                <th>time</th>
+                <th>Longitude</th>
+                <th>Latitude</th>
+            </tr>
+        `;
+    data.forEach((element: any) => {
+        var item: any = GetAllByCityData(element.city)
+        table += `
+                <tr>
+                    <td>${item.id}</td>
+                    <td>${item.city}</td>
+                    <td>${item.country}</td>
+                    <td>${item.weather}</td>
+                    <td>${item.time}</td>
+                    <td>${item.Longitude}</td>
+                    <td>${item.Latitude}</td>
+                </tr>
+            `;
+    });
+    table += '</table>';
+    var mailOptions = {
+        from: 'marlee.hagenes@ethereal.email',
+        to: 'tiwarishreyansh3@gmail.com',
+        subject: 'Sending Email using Node.js',
+        text: 'That was easy!',
+        html: `<h1>Weather Data</h1>${table}`
+    };
+    transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+            console.log(error);
+        } else {
+            console.log('Email sent: ' + info.response);
+        }
+    })
 
-// })
+})
 
 app.listen(8000, () => {
     console.log('server is running on http://localhost:8000')
