@@ -16,4 +16,4 @@ try {
 db.sync()
 
 
-export default db
+export default db;
